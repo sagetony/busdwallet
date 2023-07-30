@@ -1,0 +1,23 @@
+{
+  "name": "busd",
+  "version": "1.0.0",
+  "description": "A contract that can send and receive BUSD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Uchechukwu Anthony",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.17.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.3",
+    "@wagmi/core": "^1.3.8",
+    "@web3modal/ethereum": "^2.7.1",
+    "@web3modal/html": "^2.7.1",
+    "dotenv": "^16.3.1",
+    "viem": "^1.4.2"
+  }
+}

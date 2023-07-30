@@ -1,0 +1,10 @@
+.App {
+  text-align: center;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Optional: Adjust the height to your preference */
+}
