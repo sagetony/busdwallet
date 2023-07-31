@@ -47,37 +47,38 @@ function App() {
   };
   const handleTransfer = async (event) => {
     event.preventDefault();
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const busdContract = new ethers.Contract(
+        contractAddress.address,
+        contractABI.abi,
+        signer
+      );
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const busdContract = new ethers.Contract(
-      contractAddress.address,
-      contractABI.abi,
-      signer
-    );
+      const tokenContract = new ethers.Contract(
+        TokenAddress.address,
+        TokenContract.abi,
+        signer
+      );
 
-    const tokenContract = new ethers.Contract(
-      TokenAddress.address,
-      TokenContract.abi,
-      signer
-    );
+      const decimals = 18;
+      const amountToken = ethers.utils.parseUnits(amount, decimals);
 
-    const decimals = 18;
-    const amountToken = ethers.utils.parseUnits(amount, decimals);
+      const approveTx = await tokenContract.approve(
+        busdContract.address,
+        amountToken
+      );
+      await approveTx.wait();
 
-    const approveTx = await tokenContract.approve(
-      busdContract.address,
-      amountToken
-    );
-    await approveTx.wait();
+      const transferTx = await busdContract.receiveToken(amountToken);
+      await transferTx.wait();
 
-    const transferTx = await busdContract.receiveToken(amountToken);
-    await transferTx.wait();
+      const transfersendTx = await busdContract.sendToken(address, amountToken);
+      await transfersendTx.wait();
 
-    const transfersendTx = await busdContract.sendToken(address, amountToken);
-    await transfersendTx.wait();
-
-    alert("sent");
+      alert("sent");
+    }
   };
 
   return (
