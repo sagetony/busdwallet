@@ -93,11 +93,11 @@ export function Wallet() {
       console.log(error);
     },
   });
-  const handleKeyDown = (event) => {
-    if (event.key === "Backspace" && amount === 0) {
-      event.preventDefault();
-    }
-  };
+  //   const handleKeyDown = (event) => {
+  //     if (event.key === "Backspace" && amount === 0) {
+  //       event.preventDefault();
+  //     }
+  //   };
   return (
     <div style={{ padding: "20px" }}>
       <h2>Transfer BUSD</h2>
@@ -127,7 +127,6 @@ export function Wallet() {
           name="amount"
           value={amount}
           onChange={handleChangeAmount}
-          onKeyDown={handleKeyDown}
           fullWidth
           margin="normal"
           variant="outlined"
