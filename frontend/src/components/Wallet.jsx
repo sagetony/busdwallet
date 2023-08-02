@@ -93,6 +93,11 @@ export function Wallet() {
       console.log(error);
     },
   });
+  console.log(
+    function1,
+    waitForTransaction.isLoading,
+    waitForTransaction2.isLoading
+  );
   //   const handleKeyDown = (event) => {
   //     if (event.key === "Backspace" && amount === 0) {
   //       event.preventDefault();
