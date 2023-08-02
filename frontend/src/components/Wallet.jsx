@@ -125,7 +125,7 @@ export function Wallet() {
         <TextField
           label="Amount"
           name="amount"
-          value={amount === 0 ? "0" : amount}
+          value={amount}
           onChange={handleChangeAmount}
           onKeyDown={handleKeyDown}
           fullWidth
