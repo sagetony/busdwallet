@@ -47,13 +47,13 @@ export function Wallet() {
     args: [address, amountToken],
   });
 
-  const { data: dataFunction1, write: function1 } = useContractWrite(myConfig1);
+  const { data: dataFunction1, write } = useContractWrite(myConfig1);
   const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
   const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
 
   const handleTransfer = async (event) => {
     event.preventDefault();
-    function1();
+    write();
   };
   const handleTransfer2 = async () => {
     function2();
@@ -93,7 +93,7 @@ export function Wallet() {
       console.log(error);
     },
   });
-  console.log(function1, myConfig1);
+  console.log(write);
   //   const handleKeyDown = (event) => {
   //     if (event.key === "Backspace" && amount === 0) {
   //       event.preventDefault();
@@ -135,7 +135,7 @@ export function Wallet() {
 
         <Button
           disabled={
-            !function1 ||
+            !write ||
             waitForTransaction.isLoading ||
             waitForTransaction2.isLoading
           }
