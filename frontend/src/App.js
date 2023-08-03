@@ -32,7 +32,7 @@ const styles = {
 };
 
 function App() {
-  // console.log(wagmiConfig);
+  console.log(wagmiConfig, ethereumClient);
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
