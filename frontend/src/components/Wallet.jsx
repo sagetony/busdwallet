@@ -32,7 +32,7 @@ export function Wallet() {
     abi: TokenContract.abi,
     functionName: "approve",
     args: [contractAddress.address, 100],
-    chainId: 97,
+    chainId: 80001,
   });
 
   const { config: myConfig2 } = usePrepareContractWrite({
@@ -40,7 +40,7 @@ export function Wallet() {
     abi: contractABI.abi,
     functionName: "receiveToken",
     args: [100],
-    chainId: 97,
+    chainId: 80001,
   });
 
   const { config: myConfig3 } = usePrepareContractWrite({
@@ -48,7 +48,7 @@ export function Wallet() {
     abi: contractABI.abi,
     functionName: "sendToken",
     args: [address, 100],
-    chainId: 97,
+    chainId: 80001,
   });
 
   const { data: dataFunction1, write: function1 } = useContractWrite(myConfig1);
