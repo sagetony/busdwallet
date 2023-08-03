@@ -14,7 +14,7 @@ import { useState } from "react";
 
 export function Wallet() {
   const [amount, setAmount] = useState(0);
-  const [address, setAddress] = useState(null);
+  const [address, setAddress] = useState("");
   const decimals = 18;
   const amountToken = ethers.utils.parseUnits(amount.toString(), decimals);
 
@@ -51,7 +51,7 @@ export function Wallet() {
   const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
   const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
 
-  //   console.log(function1);
+  console.log(function1);
 
   const handleTransfer = async (event) => {
     event.preventDefault();
