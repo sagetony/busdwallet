@@ -326,7 +326,7 @@ const Wallet = () => {
     chainId: 80001,
   });
 
-  console.log(myConfig1);
+  console.log(myConfig1, "dasasasaaaaaaaaaaaaa");
 
   const { config: myConfig2 } = usePrepareContractWrite({
     address: contractAddress.address,
