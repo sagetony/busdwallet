@@ -4,9 +4,9 @@ import {
   w3mProvider,
 } from "@web3modal/ethereum";
 import { Web3Modal } from "@web3modal/react";
-import { Web3Button } from "@web3modal/react";
-import { alchemyProvider } from "wagmi/providers/alchemy";
+// import { Web3Button } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
+// import { alchemyProvider } from "wagmi/providers/alchemy";
 import {
   polygonMumbai,
   bscTestnet,
@@ -15,12 +15,14 @@ import {
   mainnet,
   bsc,
 } from "wagmi/chains";
-import { Wallet } from "./components/Wallet";
+import Wallet from "./components/Wallet";
+import ButtonFun from "./components/ButtonFun";
+
 const chains = [polygonMumbai, bscTestnet, polygon, sepolia, mainnet, bsc];
 const projectId = "9771181434c67123b41979826ab38a7a";
 
 const { publicClient } = configureChains(chains, [
-  alchemyProvider({ apiKey: "AVgKK1Jrqlu3d5lmlpR2AWpsJzUeeu1G" }),
+  // alchemyProvider({ apiKey: "AVgKK1Jrqlu3d5lmlpR2AWpsJzUeeu1G" }),
   w3mProvider({ projectId }),
 ]);
 const wagmiConfig = createConfig({
@@ -30,30 +32,29 @@ const wagmiConfig = createConfig({
 });
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
-const styles = {
-  centerContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: "39%",
-  },
-};
-
-function App() {
-  console.log("wagmiConfig", "ethereumClient");
+const App = () => {
+  console.log(
+    "wagmiConfig",
+    configureChains(chains, [
+      // alchemyProvider({ apiKey: "AVgKK1Jrqlu3d5lmlpR2AWpsJzUeeu1G" }),
+      w3mProvider({ projectId }),
+    ])
+  );
 
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
-        <div style={styles.centerContainer}>
-          <h3>BUSD Wallet</h3>
-          <Web3Button />
-        </div>
+        <ButtonFun />
         <Wallet />
       </WagmiConfig>
 
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      <Web3Modal
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+        defaultChain={polygonMumbai}
+      />
     </>
   );
-}
+};
 
 export default App;

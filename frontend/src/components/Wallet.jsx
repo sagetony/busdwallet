@@ -12,7 +12,7 @@ import TokenContract from "../abis/contractData/TokenContract.json";
 import TokenAddress from "../abis/contractData/TokenContract-address.json";
 import { useState } from "react";
 
-export function Wallet() {
+const Wallet = () => {
   const [amount, setAmount] = useState(null);
   const [address, setAddress] = useState(null);
   const decimals = 18;
@@ -154,4 +154,6 @@ export function Wallet() {
       </form>
     </div>
   );
-}
+};
+
+export default Wallet;
