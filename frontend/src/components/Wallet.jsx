@@ -51,6 +51,16 @@ export function Wallet() {
   const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
   const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
 
+  console.log(
+    function1,
+    TokenAddress.address,
+    TokenContract.abi,
+    contractAddress.address,
+    amountToken,
+    myConfig1,
+    myConfig1.chainId
+  );
+
   const handleTransfer = async (event) => {
     event.preventDefault();
     function1();
@@ -93,7 +103,6 @@ export function Wallet() {
       console.log(error);
     },
   });
-  console.log(function1);
 
   //   const handleKeyDown = (event) => {
   //     if (event.key === "Backspace" && amount === 0) {
