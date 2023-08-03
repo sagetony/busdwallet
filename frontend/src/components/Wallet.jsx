@@ -26,7 +26,7 @@ export function Wallet() {
     setAddress(event.target.value);
   };
 
-  const { config: myConfig1 } = usePrepareContractWrite({
+  const { config } = usePrepareContractWrite({
     address: TokenAddress.address,
     abi: TokenContract.abi,
     functionName: "approve",
@@ -34,78 +34,68 @@ export function Wallet() {
     chainId: 11155111,
   });
 
-  const { config: myConfig2 } = usePrepareContractWrite({
-    address: contractAddress.address,
-    abi: contractABI.abi,
-    functionName: "receiveToken",
-    args: [100],
-  });
+  //   const { config: myConfig2 } = usePrepareContractWrite({
+  //     address: contractAddress.address,
+  //     abi: contractABI.abi,
+  //     functionName: "receiveToken",
+  //     args: [100],
+  //   });
 
-  const { config: myConfig3 } = usePrepareContractWrite({
-    address: contractAddress.address,
-    abi: contractABI.abi,
-    functionName: "sendToken",
-    args: [address, 1000],
-  });
+  //   const { config: myConfig3 } = usePrepareContractWrite({
+  //     address: contractAddress.address,
+  //     abi: contractABI.abi,
+  //     functionName: "sendToken",
+  //     args: [address, 1000],
+  //   });
 
-  const { data: dataFunction1, write: function1 } = useContractWrite(myConfig1);
-  const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
-  const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
+  const { data, write } = useContractWrite(config);
+  //   const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
+  //   const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
 
-  console.log(
-    function1,
-    myConfig1,
-    "usePrepareContractWrite",
-    usePrepareContractWrite({
-      address: contractAddress.address,
-      abi: contractABI.abi,
-      functionName: "receiveToken",
-      args: [100],
-    })
-  );
+  console.log(write, config);
 
   const handleTransfer = async (event) => {
     event.preventDefault();
-    function1();
+    write?.();
   };
-  const handleTransfer2 = async () => {
-    function2();
-  };
-  const handleTransfer3 = async () => {
-    function3();
-  };
+  //   const handleTransfer2 = async () => {
+  //     function2();
+  //   };
+  //   const handleTransfer3 = async () => {
+  //     function3();
+  //   };
 
   const waitForTransaction = useWaitForTransaction({
-    hash: dataFunction1?.hash,
+    hash: data?.hash,
     // enabled: false,
     confirmations: 2,
-    onSuccess(dataFunction1) {
-      handleTransfer2();
+    onSuccess(data) {
+      //   handleTransfer2();
     },
     onError(error) {
       console.log(error);
     },
   });
-  const waitForTransaction2 = useWaitForTransaction({
-    hash: dataFunction2?.hash,
-    // enabled: false,
-    confirmations: 2,
-    onSuccess(dataFunction2) {
-      handleTransfer3();
-    },
-    onError(error) {
-      console.log(error);
-    },
-  });
-  const waitForTransaction3 = useWaitForTransaction({
-    hash: dataFunction3?.hash,
-    // enabled: false,
-    confirmations: 2,
-    onSuccess(dataFunction3) {},
-    onError(error) {
-      console.log(error);
-    },
-  });
+  //   const waitForTransaction2 = useWaitForTransaction({
+  //     hash: dataFunction2?.hash,
+  //     // enabled: false,
+  //     confirmations: 2,
+  //     onSuccess(dataFunction2) {
+  //       handleTransfer3();
+  //     },
+  //     onError(error) {
+  //       console.log(error);
+  //     },
+  //   });
+  //   const waitForTransaction3 = useWaitForTransaction({
+  //     hash: dataFunction3?.hash,
+  //     // enabled: false,
+  //     confirmations: 2,
+  //     onSuccess(dataFunction3) {},
+  //     onError(error) {
+  //       console.log(error);
+  //     },
+  //   });
 
   //   const handleKeyDown = (event) => {
   //     if (event.key === "Backspace" && amount === 0) {
@@ -115,7 +105,7 @@ export function Wallet() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>Transfer BUSD</h2>
-      {waitForTransaction.isLoading ? (
+      {/* {waitForTransaction.isLoading ? (
         <h5>Approving Transaction..</h5>
       ) : (
         <p></p>
@@ -125,7 +115,7 @@ export function Wallet() {
         <h5>Transaction Successful!!!</h5>
       ) : (
         <p></p>
-      )}
+      )} */}
       <form onSubmit={handleTransfer}>
         <TextField
           label="Address"
@@ -147,11 +137,7 @@ export function Wallet() {
         />
 
         <Button
-          disabled={
-            !function1 ||
-            waitForTransaction.isLoading ||
-            waitForTransaction2.isLoading
-          }
+          disabled={!write}
           variant="contained"
           color="primary"
           type="submit"
