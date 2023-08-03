@@ -35,14 +35,7 @@ const Wallet = () => {
     chainId: 80001,
   });
 
-  console.log(
-    TokenAddress.address,
-    TokenContract.abi,
-    "approve",
-    contractAddress.address,
-    100,
-    80001
-  );
+  console.log(myConfig1);
 
   const { config: myConfig2 } = usePrepareContractWrite({
     address: contractAddress.address,
@@ -56,7 +49,7 @@ const Wallet = () => {
     address: contractAddress.address,
     abi: contractABI.abi,
     functionName: "sendToken",
-    args: [address, 100],
+    args: ["0x1162B4951f2D1a78f461A4b1A7eECF8ad1213864", 100],
     chainId: 80001,
   });
 
