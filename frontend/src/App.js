@@ -8,8 +8,8 @@ import { Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 // import { alchemyProvider } from "wagmi/providers/alchemy";
 import {
-  polygonMumbai,
   bscTestnet,
+  polygonMumbai,
   polygon,
   sepolia,
   mainnet,
@@ -18,7 +18,7 @@ import {
 import Wallet from "./components/Wallet";
 import ButtonFun from "./components/ButtonFun";
 
-const chains = [polygonMumbai, bscTestnet, polygon, sepolia, mainnet, bsc];
+const chains = [bscTestnet, polygonMumbai, polygon, sepolia, mainnet, bsc];
 const projectId = "9771181434c67123b41979826ab38a7a";
 
 const { publicClient } = configureChains(chains, [
@@ -33,14 +33,6 @@ const wagmiConfig = createConfig({
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
 const App = () => {
-  console.log(
-    "wagmiConfig",
-    configureChains(chains, [
-      // alchemyProvider({ apiKey: "AVgKK1Jrqlu3d5lmlpR2AWpsJzUeeu1G" }),
-      w3mProvider({ projectId }),
-    ])
-  );
-
   return (
     <>
       <WagmiConfig config={wagmiConfig}>

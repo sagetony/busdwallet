@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@web3modal/ethereum": "^2.7.1",
     "@web3modal/react": "^2.7.1",
+    "big-integer": "^1.6.51",
     "ethers": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
