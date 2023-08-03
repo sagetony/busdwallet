@@ -52,12 +52,16 @@ export function Wallet() {
   const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
 
   console.log(
-    function2,
-    TokenAddress.address,
-    TokenContract.abi,
-    amountToken,
+    function1,
     myConfig1,
-    myConfig1.chainId
+    usePrepareContractWrite,
+    "usePrepareContractWrite",
+    usePrepareContractWrite({
+      address: contractAddress.address,
+      abi: contractABI.abi,
+      functionName: "receiveToken",
+      args: [100],
+    })
   );
 
   const handleTransfer = async (event) => {
