@@ -51,7 +51,7 @@ export function Wallet() {
   const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
   const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
 
-  console.log(function1);
+  console.log(myConfig1);
 
   const handleTransfer = async (event) => {
     event.preventDefault();
