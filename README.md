@@ -139,7 +139,6 @@ export default App;
 
 Congratulations! You have set up a React app to send BUSD tokens to a user address on the BSC Testnet using Web3modal and Wagmi. Make sure you have enough testnet BNB and BUSD tokens in your wallet for testing.
 
-For more information and detailed usage, check out the documentation of the libraries used:
 
 - [@wagmi/core](https://github.com/Wagmiio/wagmi-core)
 - [react-web3modal](https://github.com/NoahZinsmeister/web3-react)
