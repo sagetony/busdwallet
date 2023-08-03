@@ -35,6 +35,15 @@ const Wallet = () => {
     chainId: 80001,
   });
 
+  console.log(
+    TokenAddress.address,
+    TokenContract.abi,
+    "approve",
+    contractAddress.address,
+    100,
+    80001
+  );
+
   const { config: myConfig2 } = usePrepareContractWrite({
     address: contractAddress.address,
     abi: contractABI.abi,
@@ -54,8 +63,6 @@ const Wallet = () => {
   const { data: dataFunction1, write: function1 } = useContractWrite(myConfig1);
   const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
   const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
-
-  console.log(myConfig1, function1, TokenAddress.address, TokenContract.abi);
 
   const handleTransfer = async (event) => {
     event.preventDefault();
