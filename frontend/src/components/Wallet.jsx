@@ -55,7 +55,6 @@ export function Wallet() {
     function2,
     TokenAddress.address,
     TokenContract.abi,
-    contractAddress.address,
     amountToken,
     myConfig1,
     myConfig1.chainId
