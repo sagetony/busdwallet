@@ -31,6 +31,7 @@ export function Wallet() {
     abi: TokenContract.abi,
     functionName: "approve",
     args: [contractAddress.address, 100],
+    chainId: 11155111,
   });
 
   const { config: myConfig2 } = usePrepareContractWrite({
@@ -54,7 +55,6 @@ export function Wallet() {
   console.log(
     function1,
     myConfig1,
-    usePrepareContractWrite,
     "usePrepareContractWrite",
     usePrepareContractWrite({
       address: contractAddress.address,
