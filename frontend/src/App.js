@@ -28,6 +28,8 @@ const styles = {
 };
 
 function App() {
+  console.log(chains, ethereumClient);
+
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
