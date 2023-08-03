@@ -1,4 +1,4 @@
-# Sending BUSD Tokens with Wagmi on BSC Testnet
+# Sending BUSD Tokens with Wagmi and Web3modal on BSC Testnet
 
 This is a sample README to guide you on how to send BUSD tokens to a user address using React, Web3modal, and Wagmi on the Binance Smart Chain (BSC) Testnet.
 
