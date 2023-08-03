@@ -5,15 +5,15 @@ import {
 } from "@web3modal/ethereum";
 import { Web3Modal } from "@web3modal/react";
 import { Web3Button } from "@web3modal/react";
-import { alchemyProvider } from "wagmi/providers/alchemy";
+// import { alchemyProvider } from "wagmi/providers/alchemy";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { sepolia, mainnet, polygon, bsc } from "wagmi/chains";
+import { bscTestnet, polygon, sepolia, mainnet, bsc } from "wagmi/chains";
 import { Wallet } from "./components/Wallet";
-const chains = [sepolia, mainnet, polygon, bsc];
+const chains = [bscTestnet, polygon, sepolia, mainnet, bsc];
 const projectId = "9771181434c67123b41979826ab38a7a";
 
 const { publicClient } = configureChains(chains, [
-  alchemyProvider({ apiKey: "gerw2GTNYsJu-lBESFsJ3VZchd27Mbk6" }),
+  // alchemyProvider({ apiKey: "AVgKK1Jrqlu3d5lmlpR2AWpsJzUeeu1G" }),
   w3mProvider({ projectId }),
 ]);
 const wagmiConfig = createConfig({

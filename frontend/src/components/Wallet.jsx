@@ -13,13 +13,14 @@ import TokenAddress from "../abis/contractData/TokenContract-address.json";
 import { useState } from "react";
 
 export function Wallet() {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(null);
   const [address, setAddress] = useState(null);
   const decimals = 18;
-  const amountToken = ethers.utils.parseUnits(amount.toString(), decimals);
 
   const handleChangeAmount = async (event) => {
-    setAmount(event.target.value);
+    const inputValue = event.target.value;
+    const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
+    setAmount(sanitizedValue);
   };
 
   const handleChangeAddress = async (event) => {
@@ -31,7 +32,7 @@ export function Wallet() {
     abi: TokenContract.abi,
     functionName: "approve",
     args: [contractAddress.address, 100],
-    chainId: 11155111,
+    chainId: 97,
   });
 
   const { config: myConfig2 } = usePrepareContractWrite({
@@ -39,13 +40,15 @@ export function Wallet() {
     abi: contractABI.abi,
     functionName: "receiveToken",
     args: [100],
+    chainId: 97,
   });
 
   const { config: myConfig3 } = usePrepareContractWrite({
     address: contractAddress.address,
     abi: contractABI.abi,
     functionName: "sendToken",
-    args: [address, 1000],
+    args: [address, 100],
+    chainId: 97,
   });
 
   const { data: dataFunction1, write: function1 } = useContractWrite(myConfig1);
