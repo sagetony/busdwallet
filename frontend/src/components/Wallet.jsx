@@ -14,11 +14,13 @@ import TokenAddress from "../abis/contractData/TokenContract-address.json";
 import { useState } from "react";
 
 const Wallet = () => {
+   
+  // Handling the useState hook.
   const [value, setValue] = useState(0);
   const [amount, setAmount] = useState(0);
   const [account, setAddress] = useState(null);
 
-
+  // funtions that updates the useState
   const handleChangeAmount = async (event) => {
     const inputValue = event.target.value;
     const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
@@ -31,6 +33,7 @@ const Wallet = () => {
     setAddress(event.target.value);
   };
 
+  // use the UsePrepareContractWrite to interact with the contract
   const { config: myConfig1 } = usePrepareContractWrite({
     address: TokenAddress.address,
     abi: TokenContract.abi,
@@ -39,7 +42,7 @@ const Wallet = () => {
     chainId: 97,
   });
 
-  const { config: myConfig2 } = usePrepareContractWrite({
+  const { config: myConfig2 } =   ({
     address: contractAddress.address,
     abi: contractABI.abi,
     functionName: "sendToken",

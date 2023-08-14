@@ -4,7 +4,7 @@ async function main() {
   console.log("Deploying contracts with the account:", deployer.address);
 
   // Get the ContractFactories and Signers here.
-  const Busdwallet = await ethers.getContractFactory("BusdWallet");
+  const Busdwallet = await ethers.getContractFactory("BusdHandler");
   const Tokencontract = await ethers.getContractFactory("TokenContract");
 
   // deploy contract
