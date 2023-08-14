@@ -20,3 +20,7 @@ npm install
 ```
 
 3. Deploy your contract to the BSC Testnet and obtain the contract address.
+```bash
+npx hardhat run --network bscTestnet scripts/deploy.js
+```
+
