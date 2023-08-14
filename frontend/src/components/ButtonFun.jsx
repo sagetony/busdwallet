@@ -12,7 +12,7 @@ const ButtonFun = () => {
   return (
     <>
       <div style={styles.centerContainer}>
-        <h3>BUSD Wallet</h3>
+        <h3>BUSDPortal</h3>
         <Web3Button />
       </div>
       ;

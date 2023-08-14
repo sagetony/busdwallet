@@ -13,16 +13,3 @@ module.exports = {
     },
   },
 };
-// module.exports = {
-//   solidity: "0.8.18",
-//   defaultNetwork: "hardhat",
-//   networks: {
-//     polygonMumbai: {
-//       url: process.env.MUMBAI_RPC_URL,
-//       accounts: [process.env.PRIVATE_KEY],
-//       chainId: 80001,
-//       blockConfirmation: 6,
-//     },
-//   },
-// };
-// gasPrice: 20000000000, // 20 gwei (adjust this according to the current gas price on BSC)

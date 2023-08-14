@@ -3,6 +3,7 @@ import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
+  
 } from "wagmi";
 import { ethers } from "ethers";
 import { TextField, Button } from "@material-ui/core";
@@ -11,18 +12,17 @@ import contractABI from "../abis/contractData/BusdWallet.json";
 import TokenContract from "../abis/contractData/TokenContract.json";
 import TokenAddress from "../abis/contractData/TokenContract-address.json";
 import { useState } from "react";
-import bigInt from "big-integer";
 
 const Wallet = () => {
   const [value, setValue] = useState(0);
   const [amount, setAmount] = useState(0);
-  const [address, setAddress] = useState(null);
-  const decimals = 18;
+  const [account, setAddress] = useState(null);
+
 
   const handleChangeAmount = async (event) => {
     const inputValue = event.target.value;
     const sanitizedValue = inputValue.replace(/[^0-9]/g, "");
-    const amount = bigInt(sanitizedValue).multiply(bigInt(10).pow(decimals));
+    const amount = ethers.utils.parseEther(sanitizedValue + 0)
     setValue(sanitizedValue);
     setAmount(amount.toString());
   };
@@ -42,59 +42,28 @@ const Wallet = () => {
   const { config: myConfig2 } = usePrepareContractWrite({
     address: contractAddress.address,
     abi: contractABI.abi,
-    functionName: "receiveToken",
-    args: [amount],
-    chainId: 97,
-  });
-
-  const { config: myConfig3 } = usePrepareContractWrite({
-    address: contractAddress.address,
-    abi: contractABI.abi,
     functionName: "sendToken",
-    args: [address, amount],
+    args: [account, amount],
     chainId: 97,
+
   });
 
-  const { data: dataFunction1, write: function1 } = useContractWrite(myConfig1);
-  const { data: dataFunction2, write: function2 } = useContractWrite(myConfig2);
-  const { data: dataFunction3, write: function3 } = useContractWrite(myConfig3);
-
-  const handleTransfer = async (event) => {
-    event.preventDefault();
-    function1?.();
-  };
-  const handleTransfer2 = async () => {
-    function2?.();
-  };
-  const handleTransfer3 = async () => {
-    function3?.();
-  };
+  const { data: dataFunction1, write: functionApprove } = useContractWrite(myConfig1);
+  const { data: dataFunction3, write: functionTransfer } = useContractWrite(myConfig2);
 
   const waitForTransaction = useWaitForTransaction({
     hash: dataFunction1?.hash,
-    // enabled: false,
     confirmations: 2,
     onSuccess(dataFunction1) {
-      handleTransfer2();
+      functionTransfer?.();
     },
     onError(error) {
       console.log(error);
     },
   });
+
   const waitForTransaction2 = useWaitForTransaction({
-    hash: dataFunction2?.hash,
-    // enabled: false,
-    confirmations: 2,
-    onSuccess(dataFunction2) {
-      handleTransfer3();
-    },
-    onError(error) {
-      console.log(error);
-    },
-  });
-  const waitForTransaction3 = useWaitForTransaction({
     hash: dataFunction3?.hash,
-    // enabled: false,
     confirmations: 2,
     onSuccess(dataFunction3) {},
     onError(error) {
@@ -102,11 +71,6 @@ const Wallet = () => {
     },
   });
 
-  //   const handleKeyDown = (event) => {
-  //     if (event.key === "Backspace" && amount === 0) {
-  //       event.preventDefault();
-  //     }
-  //   };
   return (
     <div style={{ padding: "20px" }}>
       <h2>Transfer BUSD</h2>
@@ -115,17 +79,19 @@ const Wallet = () => {
       ) : (
         <p></p>
       )}
-      {waitForTransaction2.isLoading ? <h5>Sending Transaction..</h5> : <p></p>}
-      {waitForTransaction3.isSuccess ? (
+      {waitForTransaction2.isSuccess ? (
         <h5>Transaction Successful!!!</h5>
       ) : (
         <p></p>
       )}
-      <form onSubmit={handleTransfer}>
+      <form onSubmit={(e) => {
+        e.preventDefault()
+        functionApprove?.()
+      }}>
         <TextField
           label="Address"
           name="address"
-          value={address}
+          value={account}
           onChange={handleChangeAddress}
           fullWidth
           margin="normal"
@@ -143,10 +109,8 @@ const Wallet = () => {
 
         <Button
           disabled={
-            !function1 ||
-            waitForTransaction.isLoading ||
-            waitForTransaction2.isLoading
-          }
+            !functionApprove ||
+            waitForTransaction.isLoading  }
           variant="contained"
           color="primary"
           type="submit"
